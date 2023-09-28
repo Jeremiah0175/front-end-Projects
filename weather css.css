@@ -1,0 +1,156 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: #222;
+}
+
+.card {
+    width: 200%; /* Cover the full width of the container */
+    max-width: 870px; /* Limit the maximum width */
+    background: linear-gradient(135deg, #00feba, #5b548a);
+    color: #fff;
+    margin: 100px auto 0;
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
+}
+
+/* Style the search button */
+.search button {
+    background: #007BFF;
+    border: none;
+    padding: 0;
+    margin-top: -30px;
+}
+
+/* Style the search icon */
+.search button img {
+    width: 27px;
+    height: 27px;
+    margin-top: 8px;
+}
+
+/* Center the search button within the card */
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -30px;
+}
+
+/* Style the search input and button */
+.search input {
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    color: #555;
+    padding: 10px 25px;
+    height: 60px;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 16px;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.search button {
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    margin-top: 22px;
+}
+
+/* Style the weather image */
+.weather img {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: 0 auto;
+    background: none;
+}
+
+.temp {
+    font-size: 84px;
+}
+
+.weather-icon {
+    width: 170px;
+    margin-top: 30px;
+}
+
+.weather h1 {
+    font-size: 80px;
+    font-weight: 500;
+}
+
+.weather h2 {
+    font-size: 45px;
+    font-weight: 400;
+    margin-top: -10px;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px; /* Adjust padding */
+    margin-top: 50px;
+}
+
+/* Style humidity and wind */
+.humidity, .wind {
+    font-size: 13px;
+    margin-top: -6px;
+}
+
+.error {
+    text-align: left;
+    margin-left: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+}
+
+/* Adjust the size of humidity and wind icons */
+.details img {
+    width: 54px;
+    height: 54px;
+}
+
+/* Add margin to separate humidity and wind */
+.cool {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin-right: 1cm;
+}
+
+/* Add margin to the right of wind */
+.wind {
+    margin-right: -150px;
+}
+
+/* Add margin to the right of humidity */
+.humidity {
+    margin-right: -150px;
+}
+.card {
+    width: 800%; /* Cover the full width of the container */
+    max-width: 800px; /* Adjust the max-width as needed */
+    /* ... (rest of your styles) */
+}
+.humidity,
+.wind {
+    font-size: 20px; /* Adjust the font size as needed */
+    margin-top: -6px;
+}
