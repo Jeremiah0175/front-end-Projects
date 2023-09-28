@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" type="text/css" href="weather css.css">
+
+   <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f2f2f2;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 300px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .search-input {
+        width: 70%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        font-size: 16px;
+    }
+
+    .search-button {
+        background-color: #007BFF;
+        border: none;
+        border-radius: 0 5px 5px 0;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .search-button img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .error {
+        color: red;
+        font-size: 14px;
+        display: none; /* Initially hide the error message */
+        margin-bottom: 10px;
+    }
+
+    .weather {
+        display: none; /* Initially hide the weather content */
+    }
+
+    .weather-icon {
+        width: 100px;
+        height: 100px;
+         padding: 0 -50px;
+    }
+
+    .temp {
+        font-size: 24px;
+        margin: 10px 0;
+    }
+
+    .city {
+        font-size: 18px;
+        margin: 10px 0;
+    }
+
+    .details {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+  
+    }
+
+    @media (max-width: 600px) {
+        .card {
+            width: 90%;
+        }
+    }
+</style>
+
+  
+
+</head>
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="Enter city name" spellcheck="false" class="search-input">
+            <button class="search-button"><img src="https://cdn-icons-png.flaticon.com/512/54/54481.png" alt="Search"></button>
+        </div>
+        <div class="error">
+            <p>Invalid city name</p>
+        </div>
+        <div class="weather">
+            <img src="https://icons.veryicon.com/png/o/weather/weather-33/raining_sunny.png" class="weather-icon">
+            <h1 class="temp">22°C</h1>
+            <h2 class="city">New York</h2>
+            <div class="details">
+                <div class="cool">
+                    <img src="https://icons.veryicon.com/png/o/weather/green-icon/humidity-10.png">
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="cool">
+                    <img src="https://icons.veryicon.com/png/o/construction-tools/equipment/wind-32.png">
+                    <div>
+                        <p class="wind">15 km/h</p>
+                       <p>wind Speed</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+    const apikey = "74415720e7835edd2d275eb8ab5fd0c3";
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?units=metric&q=`;
+
+    const searchBox = document.querySelector(".search-input");
+    const searchBtn = document.querySelector(".search-button");
+    const weatherIcon = document.querySelector(".weather-icon");
+    const errorText = document.querySelector(".error");
+    const weatherContent = document.querySelector(".weather");
+
+    async function checkWeather(city) {
+        const response = await fetch(apiUrl + city + `&appid=${apikey}`);
+        const data = await response.json();
+
+        if (response.status === 200) {
+            // Data is successfully retrieved
+            errorText.style.display = "none"; // Hide error message
+            weatherContent.style.display = "block"; // Show weather content
+
+            document.querySelector(".city").innerHTML = data.name;
+            document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+            document.querySelector(".humidity").innerHTML = `${data.main.humidity}%`;
+            document.querySelector(".wind").innerHTML = `${data.wind.speed} km/h`;
+
+            if (data.weather[0].main == "Clouds") {
+                weatherIcon.src = "https://icons.veryicon.com/png/System/Oxygen/Status%20weather%20clouds.png";
+            } else if (data.weather[0].main == "Clear") {
+                weatherIcon.src = "https://icons.veryicon.com/png/o/miscellaneous/color-icon-library/sun-117.png";
+            } else if (data.weather[0].main == "Rain") {
+                weatherIcon.src = "https://icons.veryicon.com/png/o/weather/weather-33/raining_sunny.png";
+            } else if (data.weather[0].main == "Drizzle") {
+                weatherIcon.src = "https://icons.veryicon.com/png/o/weather/linear-weather-icon/sun-rain-night.png";
+            } else if (data.weather[0].main == "Mist") {
+                weatherIcon.src = "https://icons.veryicon.com/png/o/weather/green-icon/humidity-10.png";
+            }
+        } else {
+            // Display an error message if the request was not successful
+            errorText.style.display = "block";
+            weatherContent.style.display = "none";
+        }
+    }
+
+    searchBtn.addEventListener("click", () => {
+        checkWeather(searchBox.value);
+    });
+
+    // You can also trigger the search when the user presses Enter in the input field
+    searchBox.addEventListener("keyup", (event) => {
+        if (event.key === "Enter") {
+            checkWeather(searchBox.value);
+        }
+    });
+</script>
+
+    </div>
+</body>
+</html>
